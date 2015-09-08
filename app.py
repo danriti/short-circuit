@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 def get_time():
-    response = requests.get('http://localhost:3001/time')
+    response = requests.get('http://localhouse:3001/time')
     return response.json().get('datetime')
 
 
