@@ -1,6 +1,7 @@
 """ service_time.py """
 
 from datetime import datetime
+from time import sleep
 
 from flask import Flask, jsonify
 
@@ -12,6 +13,8 @@ count = 0
 @app.route("/time", methods=['GET'])
 def get_datetime():
     global count
+    # sleep to simulate the service response time degrading
+    sleep(count)
     count += 1
     return jsonify(count=count,
                    datetime=datetime.now().isoformat())
