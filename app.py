@@ -8,7 +8,10 @@ app = Flask(__name__)
 
 
 def get_time():
-    response = requests.get('http://localhouse:3001/time')
+    try:
+        response = requests.get('http://localhouse:3001/time')
+    except requests.exceptions.ConnectionError:
+        return 'Unavailable'
     return response.json().get('datetime')
 
 
