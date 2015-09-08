@@ -9,8 +9,9 @@ app = Flask(__name__)
 
 def get_time():
     try:
-        response = requests.get('http://localhost:3001/time')
-    except requests.exceptions.ConnectionError:
+        response = requests.get('http://localhost:3001/time', timeout=3.0)
+    except (requests.exceptions.ConnectionError,
+            requests.exceptions.Timeout):
         return 'Unavailable'
     return response.json().get('datetime')
 
