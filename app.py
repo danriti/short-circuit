@@ -4,9 +4,12 @@ from flask import Flask, render_template
 import pybreaker
 import requests
 
+from listener import LogListener
+
 
 app = Flask(__name__)
 time_breaker = pybreaker.CircuitBreaker(fail_max=3, reset_timeout=30)
+time_breaker.add_listeners(LogListener(app))
 
 
 @time_breaker
